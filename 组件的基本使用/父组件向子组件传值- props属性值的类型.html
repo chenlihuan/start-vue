@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+     <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>{{pmsg}}</div>  
+        <menu-item :pstr="pstr" :pnum="12"  :pboo="true" :parr="parr"  :pobj="pobj"></menu-item>   
+        
+        <cpn :cmessage="message" :cmovies="movies"></cpn>
+        <ctest :c-info="info" :child-my-message="messageesd"></ctest>
+    </div> 
+
+    <template id="cpn">
+        <div>
+            <ul>
+                <li v-for="item in cmovies" >{{item}}</li>
+            </ul>
+            <h2>{{cmessage}}</h2>
+        </div>
+    </template>
+
+    <template id="ctest">
+        <div>
+            <h2>{{cInfo}}</h2>
+            <h2>{{childMyMessage}}</h2>
+        </div>
+    </template>
+</body>
+<script>
+    Vue.component('menu-item',{
+        props: ['pstr','parr','pobj','pnum','pboo'],
+        template:`
+            <div>
+                <div>{{pstr}}</div>
+                <div>{{12 + pnum}}</div>
+                <div>{{typeof pboo}}</div>
+                <ul><li v-for='(item,index) in parr' :key='index'>{{item}}</li></ul>
+                <span>{{pobj.name}}</span>
+                <span>{{pobj.aga}}</span>
+            </div>
+        `,
+    })
+    
+    /*父传子*/
+    const cpn = {
+        template:'#cpn',
+        props: {
+            cmessage:{
+                type:String,
+                default:'aaaaaaa',
+                required: true
+            },
+            //类型是对象或者数组时，默认值必须是一个函数
+            cmovies:{
+                type:Array,
+                default(){
+                    return []
+                }
+            }
+        },
+        data(){
+            return{
+
+            }
+        },
+        methods: {
+            
+        }
+    }
+
+    const ctest = {
+        template:'#ctest',
+        props:{
+            cInfo:{
+                type:Object,
+                default() {
+                    return{}
+                }
+            },
+            childMyMessage:{
+                type:String,
+                default:''
+            }
+        }
+    }
+
+    const vm = new Vue({
+        el:"#app",
+        data:{
+            pmsg:"父组件中内容",
+            pstr:"vue",
+            parr:['apple','orange','banana'],
+            pobj:{
+                name:'lisi',
+                aga:12
+            },
+            message: '你好啊',
+            movies: ['海王', '海贼王', '海尔兄弟'],
+            info:{
+                name: 'why',
+                age: 18,
+                height: 1.88
+            },
+            messageesd: 'aaaaaa'
+        },
+        components:{
+            cpn,
+            ctest
+        }
+    })
+</script>
+</html>

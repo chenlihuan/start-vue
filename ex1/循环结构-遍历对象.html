@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-if="v=='lisi'" v-for="(v,k,i) in obj">{{v + '---' + k + '---' + i}}</div>
+    </div>
+    <script>
+        // 原生js遍历对象
+        var obj={
+            uname:'lisi',
+            age:12,
+            gender:'male'
+        }
+        for(var key in obj){
+            console.log(key,obj[key]);
+        }
+        /*
+            循环结构
+            v-代表循环的值value
+            k-代表循环的key值
+            i-代表循环的索引值
+        */
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                obj:{
+                    uname:'lisi',
+                    age:13,
+                    gender:'male'
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">{{mes}}</div>
+    <script>
+        let app = new Vue({
+            el:"#app",
+            data:{
+                mes:'hi ada'
+            },
+            beforeCreate(){
+                console.log('组件实例被创建之初，组件的属性生效之前')
+            },
+            created(){
+                console.log('组件实例已经完全创建，属性也绑定，但真实dom还没有生成，$el还不可用')
+            },
+            beforeMount(){
+                console.log('在挂载之前被调用，相关的rander函数首次被调用')
+            },
+            mounted(){
+                console.log('el被新创建的vm.$el替换，并挂载到实例上去之后调用该钩子函数')
+            },
+            beforeUpdate(){
+                console.log("组件数据更新之前调用，发生在虚拟dom打补丁之前")
+            },
+            updated(){
+                console.info("组件数据更新之后")
+            },
+            actived(){
+                console.log('keep-alive专属，组件被激活时调用')
+            },
+            deactivated(){
+                console.log('keep-alive专属，组件被销毁时调用')
+            },
+            destroyed(){
+                console.log('组件销毁后调用')
+            }
+        })
+    </script>
+</body>
+</html>

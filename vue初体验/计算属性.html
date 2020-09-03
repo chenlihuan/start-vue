@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>总价格:{{totalPrice}}</h2>
+    </div>
+</body>
+<script>
+  let app = new Vue({
+      el:'#app',
+      data:{
+          books:[
+              {name:'java编程艺术',price:99,count:3},
+              {name:'unix编程艺术',price:118,count:1},
+              {name:'vue.js编程艺术',price:89,count:3}
+          ]
+      },
+      computed: {
+          // 直接当做普通属性调用不加括号
+          // 任何data中数据变化立即重新计算
+          // 计算属性会缓存
+       totalPrice(){
+           //第一种方式
+        //    let total = 0;
+        //    this.books.forEach(books => {
+        //        total += books.price * books.count
+        //    });
+        //    return total;
+        // 第二种方式
+    //     let total = 0;
+    //     for(let i in this.books){
+    //         const book = this.books[i];
+    //         total += book.price * book.count
+    //     }
+    //     return total;
+    //    }  
+    // 第三种方式
+        return this.books.reduce((preValue, book) => {
+            return preValue + book.price * book.count
+        },0)
+    }
+ }
+})
+</script>
+</html>

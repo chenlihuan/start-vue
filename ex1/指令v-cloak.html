@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div v-cloak>
+            {{msg}}
+        </div>
+        <h1>---------------------</h1>
+        <div>{{msg}}</div>
+        <div v-text="msg"></div>
+        <div v-html="msg1"></div>
+        <div v-pre>{{msg}}</div>
+        <h2>============================</h2>
+        <div v-once="handle">{{info}}</div>
+    </div>
+</body>
+<script>
+    /*
+    v-text指令用于将数据填充到标签中，作用于插值表达式类似，但是没有闪动问题
+    v-html指令用于将HTML片段填充到标签中，但是可能有安全问题
+    v-pre用于显示原生信息
+    v-once的应用场景：如果显示的信息后续不需要再修改，你们可以使用v-once，这样可以提高性能
+    */
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            msg:'hello Vue',
+            msg1:'<h1>HTML</h1>',
+            info:'nihao'
+        }
+    })
+</script>
+</html>

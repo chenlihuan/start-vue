@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style type="text/css">
+    .active {
+      border: 1px solid red;
+      width: 100px;
+      height: 100px;
+    }
+    .error {
+      background-color: orange;
+    }
+    .test {
+      color: blue;
+    }
+    .base {
+      font-size: 28px;
+    }
+  </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 对象绑定和数组绑定可以结合使用 -->
+        <div v-bind:class="[activeClass,errorClass,{test:istest}]">测试样式</div>
+        <h1>--------------</h1>
+        <!-- class绑定的值可以简化 -->
+        <div :class="arrClasses"></div>
+        <h1>--------------</h1>
+        <div :class="objClasses"></div>
+        <h1>--------------</h1>
+        <!-- 默认的class如何处理？默认的class会保留 -->
+        <div class="base" :class="arrClasses"></div>
+        <h1>--------------</h1>
+        <div @click="bandel">切换</div>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            activeClass:'active',
+            errorClass:'error',
+            istest:true,
+            arrClasses:['active','error'],
+            objClasses:{
+                active:true,
+                error:true
+            }
+        },
+        methods: {
+            bandel(){
+                this.objClasses.error = false;
+            }
+        },
+    })
+</script>
+</html>

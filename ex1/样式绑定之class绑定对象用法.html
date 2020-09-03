@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .active{
+            border:1px solid red;
+            width: 100px;
+            height: 100px;
+        }
+        .error{
+            background-color:orange;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        class对象用法 
+        给v-bind:class 设置一个对象，可以动态地切换class,类名active依赖于数据isActive,当其为true时候，div会拥有类名active,为false时则没
+        对象中也可以传入多个属性，来动态切换class,另外，:class可以与普通class共存
+        当class的表达式过长或者逻辑复杂时候，还可以绑定一个计算属性，这是一种友好和常见的用法，一般当条件多于两个时，都可以使用data或者computed,例如
+            <div id="app">
+                <div :class="classes"></div>
+            </div>
+
+            <script>
+            var app = new Vue({
+                el:'#app',
+                data:{
+                    isActive:true,
+                    isError:null
+                },
+                computed:{
+                    classes(){
+                        return {
+                            active:this.isActive && !this.error,
+                            'text-fail':this.error && this.error.type ==='fail'
+                        }
+                    }
+                }
+            })
+</script>
+    -->
+    <!-- <div id="app">
+        <div v-bind:class="{active:isactive,error:isError}">
+            测试样式
+        </div>
+        <button @click="handel">切换</button>
+    </div>
+    <script>
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            isactive:true,
+            isError:true
+        },
+        methods: {
+            handel(){
+                this.isactive = !this.isactive;
+                this.isError = !this.isError;
+            }
+        },
+    })
+    </script> -->
+
+    <!-- 
+        class数组的用法     
+        用三元表达式来根据条件切换class
+    -->    
+    <div id="app">
+        <div v-bind:class="[activeClass,errorClass]">
+            测试样式
+        </div>
+        <button @click="handel">切换</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                isactiveClass:true,
+                activeClass:'active',
+                errorClass:'error'
+            },
+            methods: {
+                handel(){
+                    this.activeClass = '';
+                    this.errorClass = '';
+                }
+            },
+        })
+    </script>
+</body>
+</html>
